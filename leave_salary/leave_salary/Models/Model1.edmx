@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="sampleModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="basic1">
+          <Key>
+            <PropertyRef Name="emp_id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="emp_name" Type="nvarchar" MaxLength="20" />
+          <Property Name="emp_id" Type="int" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="20" />
+          <Property Name="mobile" Type="nvarchar" MaxLength="20" />
+          <Property Name="address" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="leave">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="empid" Type="int" />
+          <Property Name="typeofleave" Type="varchar" MaxLength="250" />
+          <Property Name="startdate" Type="date" />
+          <Property Name="enddate" Type="date" />
+          <Property Name="comments" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="leaveapp">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="empid" Type="int" />
+          <Property Name="typeofleave" Type="varchar" MaxLength="250" />
+          <Property Name="startdate" Type="date" />
+          <Property Name="enddate" Type="date" />
+          <Property Name="comments" Type="nvarchar" MaxLength="250" />
+          <Property Name="ApplyforLeave" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__leave__empid__60A75C0F">
+          <End Role="basic1" Type="Self.basic1" Multiplicity="0..1" />
+          <End Role="leave" Type="Self.leave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="basic1">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="leave">
+              <PropertyRef Name="empid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__leaveapp__empid__66603565">
+          <End Role="basic1" Type="Self.basic1" Multiplicity="0..1" />
+          <End Role="leaveapp" Type="Self.leaveapp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="basic1">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="leaveapp">
+              <PropertyRef Name="empid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="sampleModelStoreContainer">
+          <EntitySet Name="basic1" EntityType="Self.basic1" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="leave" EntityType="Self.leave" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="leaveapp" EntityType="Self.leaveapp" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__leave__empid__60A75C0F" Association="Self.FK__leave__empid__60A75C0F">
+            <End Role="basic1" EntitySet="basic1" />
+            <End Role="leave" EntitySet="leave" />
+          </AssociationSet>
+          <AssociationSet Name="FK__leaveapp__empid__66603565" Association="Self.FK__leaveapp__empid__66603565">
+            <End Role="basic1" EntitySet="basic1" />
+            <End Role="leaveapp" EntitySet="leaveapp" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="sampleModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="basic1">
+          <Key>
+            <PropertyRef Name="emp_id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="emp_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="emp_id" Type="Int32" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="mobile" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="leaves" Relationship="Self.FK__leave__empid__60A75C0F" FromRole="basic1" ToRole="leave" />
+          <NavigationProperty Name="leaveapps" Relationship="sampleModel.FK__leaveapp__empid__66603565" FromRole="basic1" ToRole="leaveapp" />
+        </EntityType>
+        <EntityType Name="leave">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="empid" Type="Int32" />
+          <Property Name="typeofleave" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="startdate" Type="DateTime" Precision="0" />
+          <Property Name="enddate" Type="DateTime" Precision="0" />
+          <Property Name="comments" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="basic1" Relationship="Self.FK__leave__empid__60A75C0F" FromRole="leave" ToRole="basic1" />
+        </EntityType>
+        <Association Name="FK__leave__empid__60A75C0F">
+          <End Role="basic1" Type="Self.basic1" Multiplicity="0..1" />
+          <End Role="leave" Type="Self.leave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="basic1">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="leave">
+              <PropertyRef Name="empid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="sampleEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="basic1" EntityType="Self.basic1" />
+          <EntitySet Name="leaves" EntityType="Self.leave" />
+          <AssociationSet Name="FK__leave__empid__60A75C0F" Association="Self.FK__leave__empid__60A75C0F">
+            <End Role="basic1" EntitySet="basic1" />
+            <End Role="leave" EntitySet="leaves" />
+          </AssociationSet>
+          <EntitySet Name="leaveapps" EntityType="sampleModel.leaveapp" />
+          <AssociationSet Name="FK__leaveapp__empid__66603565" Association="sampleModel.FK__leaveapp__empid__66603565">
+            <End Role="basic1" EntitySet="basic1" />
+            <End Role="leaveapp" EntitySet="leaveapps" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="leaveapp">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="empid" Type="Int32" />
+          <Property Name="typeofleave" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="startdate" Type="DateTime" Precision="0" />
+          <Property Name="enddate" Type="DateTime" Precision="0" />
+          <Property Name="comments" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ApplyforLeave" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="basic1" Relationship="sampleModel.FK__leaveapp__empid__66603565" FromRole="leaveapp" ToRole="basic1" />
+        </EntityType>
+        <Association Name="FK__leaveapp__empid__66603565">
+          <End Type="sampleModel.basic1" Role="basic1" Multiplicity="0..1" />
+          <End Type="sampleModel.leaveapp" Role="leaveapp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="basic1">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="leaveapp">
+              <PropertyRef Name="empid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="sampleModelStoreContainer" CdmEntityContainer="sampleEntities">
+          <EntitySetMapping Name="basic1">
+            <EntityTypeMapping TypeName="sampleModel.basic1">
+              <MappingFragment StoreEntitySet="basic1">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="emp_name" ColumnName="emp_name" />
+                <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="mobile" ColumnName="mobile" />
+                <ScalarProperty Name="address" ColumnName="address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="leaves">
+            <EntityTypeMapping TypeName="sampleModel.leave">
+              <MappingFragment StoreEntitySet="leave">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="empid" ColumnName="empid" />
+                <ScalarProperty Name="typeofleave" ColumnName="typeofleave" />
+                <ScalarProperty Name="startdate" ColumnName="startdate" />
+                <ScalarProperty Name="enddate" ColumnName="enddate" />
+                <ScalarProperty Name="comments" ColumnName="comments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="leaveapps">
+            <EntityTypeMapping TypeName="sampleModel.leaveapp">
+              <MappingFragment StoreEntitySet="leaveapp">
+                <ScalarProperty Name="ApplyforLeave" ColumnName="ApplyforLeave" />
+                <ScalarProperty Name="comments" ColumnName="comments" />
+                <ScalarProperty Name="enddate" ColumnName="enddate" />
+                <ScalarProperty Name="startdate" ColumnName="startdate" />
+                <ScalarProperty Name="typeofleave" ColumnName="typeofleave" />
+                <ScalarProperty Name="empid" ColumnName="empid" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

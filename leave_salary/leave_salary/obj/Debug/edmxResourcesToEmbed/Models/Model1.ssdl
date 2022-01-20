@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="sampleModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="basic1">
+    <Key>
+      <PropertyRef Name="emp_id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="emp_name" Type="nvarchar" MaxLength="20" />
+    <Property Name="emp_id" Type="int" Nullable="false" />
+    <Property Name="email" Type="nvarchar" MaxLength="20" />
+    <Property Name="mobile" Type="nvarchar" MaxLength="20" />
+    <Property Name="address" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="leave">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="empid" Type="int" />
+    <Property Name="typeofleave" Type="varchar" MaxLength="250" />
+    <Property Name="startdate" Type="date" />
+    <Property Name="enddate" Type="date" />
+    <Property Name="comments" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="leaveapp">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="empid" Type="int" />
+    <Property Name="typeofleave" Type="varchar" MaxLength="250" />
+    <Property Name="startdate" Type="date" />
+    <Property Name="enddate" Type="date" />
+    <Property Name="comments" Type="nvarchar" MaxLength="250" />
+    <Property Name="ApplyforLeave" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK__leave__empid__60A75C0F">
+    <End Role="basic1" Type="Self.basic1" Multiplicity="0..1" />
+    <End Role="leave" Type="Self.leave" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="basic1">
+        <PropertyRef Name="emp_id" />
+      </Principal>
+      <Dependent Role="leave">
+        <PropertyRef Name="empid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__leaveapp__empid__66603565">
+    <End Role="basic1" Type="Self.basic1" Multiplicity="0..1" />
+    <End Role="leaveapp" Type="Self.leaveapp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="basic1">
+        <PropertyRef Name="emp_id" />
+      </Principal>
+      <Dependent Role="leaveapp">
+        <PropertyRef Name="empid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="sampleModelStoreContainer">
+    <EntitySet Name="basic1" EntityType="Self.basic1" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="leave" EntityType="Self.leave" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="leaveapp" EntityType="Self.leaveapp" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__leave__empid__60A75C0F" Association="Self.FK__leave__empid__60A75C0F">
+      <End Role="basic1" EntitySet="basic1" />
+      <End Role="leave" EntitySet="leave" />
+    </AssociationSet>
+    <AssociationSet Name="FK__leaveapp__empid__66603565" Association="Self.FK__leaveapp__empid__66603565">
+      <End Role="basic1" EntitySet="basic1" />
+      <End Role="leaveapp" EntitySet="leaveapp" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

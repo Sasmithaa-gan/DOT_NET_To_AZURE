@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="sampleModelStoreContainer" CdmEntityContainer="sampleEntities">
+    <EntitySetMapping Name="basic1">
+      <EntityTypeMapping TypeName="sampleModel.basic1">
+        <MappingFragment StoreEntitySet="basic1">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="emp_name" ColumnName="emp_name" />
+          <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="mobile" ColumnName="mobile" />
+          <ScalarProperty Name="address" ColumnName="address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="leaves">
+      <EntityTypeMapping TypeName="sampleModel.leave">
+        <MappingFragment StoreEntitySet="leave">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="empid" ColumnName="empid" />
+          <ScalarProperty Name="typeofleave" ColumnName="typeofleave" />
+          <ScalarProperty Name="startdate" ColumnName="startdate" />
+          <ScalarProperty Name="enddate" ColumnName="enddate" />
+          <ScalarProperty Name="comments" ColumnName="comments" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="leaveapps">
+      <EntityTypeMapping TypeName="sampleModel.leaveapp">
+        <MappingFragment StoreEntitySet="leaveapp">
+          <ScalarProperty Name="ApplyforLeave" ColumnName="ApplyforLeave" />
+          <ScalarProperty Name="comments" ColumnName="comments" />
+          <ScalarProperty Name="enddate" ColumnName="enddate" />
+          <ScalarProperty Name="startdate" ColumnName="startdate" />
+          <ScalarProperty Name="typeofleave" ColumnName="typeofleave" />
+          <ScalarProperty Name="empid" ColumnName="empid" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
